@@ -25,7 +25,10 @@ public class Controller {
 	}
 
 	
-	
+	@GetMapping("/hello2")
+	public String sayHello2() {
+		return "Hello World2 !";
+	}
 	
 	@GetMapping("/combination")
 	public ResponseEntity<String>getCombination(@RequestParam("budget") Double budget){
