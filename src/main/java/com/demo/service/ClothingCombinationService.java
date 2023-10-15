@@ -46,7 +46,7 @@ Map<String, Double> prices = new HashMap<>();
                     
                     if (remainingMoney < 50) {
                     	count++;
-                        combinations.add("Combination:"+ count +" ==>   T-shirts = " + tShirts + "   Jeans = " + jeans + "   Jackets = " + jackets + ", remainingBudget = " + remainingMoney);
+                        combinations.add("Combination:"+ count +" ==>"+"  "+" "+"T-shirts = " + tShirts +" "+" "+" "+"Jeans = " + jeans +" "+" "+" "+"Jackets = " + jackets + ", remainingBudget = " + remainingMoney);
                     }
                 }
             }
