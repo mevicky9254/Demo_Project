@@ -12,7 +12,7 @@ public class ClothingCombinationService {
 	
 	public List<String> getCombinations(double budget) throws Exception {
     	
-        Map<String, Double> prices = new HashMap<>();
+Map<String, Double> prices = new HashMap<>();
         
         prices.put("T-shirt", 50.00);
         prices.put("Jeans", 80.00);
@@ -26,25 +26,27 @@ public class ClothingCombinationService {
         List<String> combinations = new ArrayList<>();
         
         int count=0;
+        
         for (int tShirts = 1; tShirts * prices.get("T-shirt") <= budget; tShirts++) {
         	
             for (int jeans = 1; jeans * prices.get("Jeans") <= budget - tShirts * prices.get("T-shirt"); jeans++) {
             	
-                double remainingBudget = budget - tShirts * prices.get("T-shirt") - jeans * prices.get("Jeans");
+                double remainingBudget = budget - (tShirts * prices.get("T-shirt") + jeans * prices.get("Jeans"));
                 
                 double jacketPrice = prices.get("Jacket");
 
-                if (remainingBudget > jacketPrice) {
+                if (remainingBudget >= jacketPrice) {
                 	
                     int jackets = (int) (remainingBudget / jacketPrice);
                     
-                    remainingBudget -= jackets * jacketPrice;
                     
-                    double totalPrice = tShirts * prices.get("T-shirt") + jeans * prices.get("Jeans") + jackets * jacketPrice;
-
-                    if (remainingBudget < 50) {
+                    double totalSpent = tShirts * prices.get("T-shirt") + jeans * prices.get("Jeans") + jackets * jacketPrice;
+                    
+                    double remainingMoney=budget- totalSpent;
+                    
+                    if (remainingMoney < 50) {
                     	count++;
-                        combinations.add("Combination:"+ count +" ==> T-shirts = " + tShirts + ", Jeans = " + jeans + ", Jackets = " + jackets + ", remainingBudget = " + remainingBudget);
+                        combinations.add("Combination:"+ count +" ==>   T-shirts = " + tShirts + "   Jeans = " + jeans + "   Jackets = " + jackets + ", remainingBudget = " + remainingMoney);
                     }
                 }
             }
