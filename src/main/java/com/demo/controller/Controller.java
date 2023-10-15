@@ -1,9 +1,10 @@
 package com.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +14,6 @@ import com.demo.service.ClothingCombinationService;
 
 
 @RestController
-@CrossOrigin(origins="*")
 public class Controller {
 	
 	@Autowired
@@ -21,20 +21,15 @@ public class Controller {
 	
 	@GetMapping("/hello")
 	public String sayHello() {
-		return "Hello Worldgggggg !";
+		return "Hello World !";
 	}
 
 	
-	@GetMapping("/hello2")
-	public String sayHello2() {
-		return "Hello World2 !";
-	}
-	
 	@GetMapping("/combination")
-	public ResponseEntity<String>getCombination(@RequestParam("budget") Double budget){
+	public ResponseEntity<List<String>>getCombination(@RequestParam("budget") Double budget) throws Exception{
 		 
-		String message=cService.getCombinations(budget);
+		List<String> resultList=cService.getCombinations(budget);
 		
-		return new ResponseEntity<>(message, HttpStatus.OK);
+		return new ResponseEntity<>(resultList, HttpStatus.OK);
 	}
 }

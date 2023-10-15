@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ClothingCombinationService {
 	
-	public String getCombinations(double budget) {
+	public List<String> getCombinations(double budget) throws Exception {
     	
         Map<String, Double> prices = new HashMap<>();
         
@@ -19,13 +19,13 @@ public class ClothingCombinationService {
         prices.put("Jacket", 100.00);
         
         if (budget < 230) {
-            return "Your budget is insufficient !";
+             throw new Exception("Your budget is insufficient !");
         }
 
 
         List<String> combinations = new ArrayList<>();
         
-     
+        int count=0;
         for (int tShirts = 1; tShirts * prices.get("T-shirt") <= budget; tShirts++) {
         	
             for (int jeans = 1; jeans * prices.get("Jeans") <= budget - tShirts * prices.get("T-shirt"); jeans++) {
@@ -43,8 +43,8 @@ public class ClothingCombinationService {
                     double totalPrice = tShirts * prices.get("T-shirt") + jeans * prices.get("Jeans") + jackets * jacketPrice;
 
                     if (remainingBudget < 50) {
-                    	
-                        combinations.add("Combination: T-shirts = " + tShirts + ", Jeans = " + jeans + ", Jackets = " + jackets + ", remainingBudget = " + remainingBudget);
+                    	count++;
+                        combinations.add("Combination:"+ count +" ==> T-shirts = " + tShirts + ", Jeans = " + jeans + ", Jackets = " + jackets + ", remainingBudget = " + remainingBudget);
                     }
                 }
             }
@@ -58,6 +58,6 @@ public class ClothingCombinationService {
         
         System.out.println("Total valid combinations: " + combinations.size());
 
-        return "Total valid combinations: " + combinations.size();
+        return combinations;
     }
 }
