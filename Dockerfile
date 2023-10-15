@@ -7,6 +7,6 @@ RUN mvn clean package -DskipTests
 # Stage 2: Create a lightweight image to run the application
 FROM openjdk:17.0.1-jdk-slim
 WORKDIR /app
-COPY --from=build /target/ClothingCombinationFinder-0.0.1-SNAPSHOT.jar ClothingCombinationFinder.jar
+COPY --from=build /target/demo-0.0.1-SNAPSHOT.jar demo.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "ClothingCombinationFinder.jar"]
